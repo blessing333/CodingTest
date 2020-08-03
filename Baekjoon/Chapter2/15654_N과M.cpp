@@ -9,7 +9,7 @@ bool check[10];
 void permu(){
     if(v2.size()==m){
         for(auto it:v2)
-            cout<<v1[it];
+            cout<<v1[it]<<" ";
         cout << "\n";
         return;
     }
