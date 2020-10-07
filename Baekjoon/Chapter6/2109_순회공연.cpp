@@ -11,21 +11,27 @@ int main(){
     for(int i=0;i<n;i++){
         //second = pay, first=day
         int p,d;scanf("%d%d",&p,&d);
-        //arr[d-1]++;
+        arr[d-1]++;
         v.push_back({d,p});
         //cout << de<<". first = "<<v[de].first << "second = " <<v[de].second<<"\n";
         //de++;
     }
-    printf("ddd");
-
+    
     sort(v.begin(),v.end());
-    for(int i=0;i<v.size();){
+    
+    int index=0;
+    for(int i=0;i<v.size();i++){
+        cout << i;
+        if(index>i) continue;
         int money=0;
-        for(int j=i;j<j+arr[v[i].first-1];j++){
-            money=max(money,v[j].first);
+        for(int j=i;j<i+arr[v[i].first-1];j++){
+            money=max(money,v[j].second);
+            cout << "j : " <<j<<"\n";
+            cout << "arr[] : "<<j+arr[v[i].first-1] <<"\n";
         }
         sum+=money;
-        i+=arr[v[i].first-1];
+        printf("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+        index=i+arr[v[i].first-1];
     }
     cout <<sum;
 }
