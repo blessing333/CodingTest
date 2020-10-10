@@ -11,8 +11,8 @@ vector<int> v,v2; // v : 석순   v2 : 종유석
         - (h-종유석의 길이)가 row보다  큰경우
 */
 void func(int row){
-    int a= v.end() - upper_bound(v.begin(),v.end(),row);
-    int b=lower_bound(v2.begin(),v2.end(),row)-v2.begin()-1;
+    int a= v.end() - lower_bound(v.begin(),v.end(),row);
+    int b=lower_bound(v2.begin(),v2.end(),row)-v2.begin();
     //cout <<"\n\n"<< a << "\n" <<b<<"\n";
     int sum=a+b;
     if(sum<minimum){
