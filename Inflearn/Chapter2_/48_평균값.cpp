@@ -23,6 +23,10 @@ int main(){
             if(abs(avg[i]-result[i])>diff){
                 result[i]=board[i][j];
             }
+
+            else if(abs(avg[i]-result[i])==diff){
+                result[i]=max(result[i],board[i][j]);
+            }
         }
     }
     for(int i=0;i<9;i++){
