@@ -13,7 +13,7 @@ int main(){
         for(int j=0;j<9;j++){
             sum+=board[i][j];
         }
-        avg[i]=sum/9;
+        avg[i]=(sum/9)+0.5;
     }
     
     for(int i=0;i<9;i++){
