@@ -26,6 +26,7 @@ int main(){
         cin >> a >> b >> w;
         board[a][b]=w;
     }
+    check[1]=true;
     go(1,0);
     cout << minimum;
 }
