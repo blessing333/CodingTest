@@ -28,6 +28,7 @@ int main(){
         }
     }
     check[(int)board[0][0]-'A']=true;
+    cout << board[0][0]-'A';
     dfs(0,0,1);
     printf("%d",ret);
 
