@@ -1,47 +1,48 @@
-/*
-    부르트포스,조합
-    주어진 치킨집 중 m개의 치킨집을 골라 치킨 거리가 최소가 되는 경우를 출력
-*/
 #include<bits/stdc++.h>
 using namespace std;
-int n,m,k, result=98765543;
-vector<pair<int,int>> home,chk,v;
-int getDist(int x1,int y1,int x2,int y2){
-    return abs(x1-x2) + abs(y1-y2);
-}
+int n,m,board[50][50],ret=INT_MAX;
+int dx[]={1,0,-1,0},dy[]={0,1,0,-1};
+bool visited[50][50];
+vector<pair<int,int>> v;
+vector<pair<int,int>> candi;
+vector<pair<int,int>> home;
+queue<pair<int,int>> q;
 void combi(int here){
-    if(v.size()==m){
+    if(candi.size()==m){
         int total=0;
         for(auto it : home){
-            int least=987654321;
-            for(auto it2:v){
-                least=min(least,getDist(it.first,it.second,it2.first,it2.second));
+            int perChicken=INT_MAX;
+            pair<int,int> curHome=it;
+            for(auto chiken : candi){
+                pair<int,int> curChiken=chiken;
+                int dist=abs(curChiken.first-curHome.first)+abs(curChiken.second-curHome.second);
+                perChicken=min(perChicken,dist);
             }
-            total+=least;
+            total+=perChicken;
         }
-        result=min(total,result);
+        ret=min(total,ret);
         return;
     }
 
-    for(int i=here+1;i<chk.size();i++){
-        v.push_back(chk[i]);
+    for(int i=here+1;i<v.size();i++){
+        candi.push_back(v[i]);
         combi(i);
-        v.pop_back();
+        candi.pop_back();
     }
 }
+
 int main(){
     cin >> n >> m;
-    for(int i=1;i<=n;i++){
-        for(int j=1;j<=n;j++){
-            cin >> k;
-            if(k==1){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cin >> board[i][j];
+            if(board[i][j]==2){
+                v.push_back({i,j});
+            }
+            else if(board[i][j]==1)
                 home.push_back({i,j});
-            }
-            else if(k==2){
-                chk.push_back({i,j});
-            }
         }
     }
     combi(-1);
-    cout<< result;
+    cout << ret;
 }
