@@ -1,16 +1,38 @@
 #include<bits/stdc++.h>
+
 using namespace std;
-bool cmp(const int &a,const int &b){
-        return a<b;
+bool cmp(const pair<double,int> &a, const pair<double, int> &b){
+    if(a.first==b.first) return a.second<b.second;
+    else return a.first > b.first;
+}
+
+vector<int> solution(int N, vector<int> stages) {
+    int reach[501]={0,};
+    int clear[501]={0,};
+    vector<pair<double,int>> v;
+    vector<int> answer;
+    for(auto it : stages){
+        for(int i=1;i<=it;i++){
+            reach[i]++;
+            if(i!=it){
+                clear[i]++;
+            }
+        }
     }
-int main(){
-    vector<int> v;
-    v.push_back(2);
-    v.push_back(1);
-    v.push_back(6);
-    v.push_back(7);
-    sort(v.begin(),v.end(),less<>());
+    for(int i=1;i<=N;i++){
+        double failRate;
+        if(reach[i]==0){
+            failRate=0;
+        }
+        else{
+            failRate=(double)(reach[i]-clear[i])/reach[i];
+        }
+        v.push_back({failRate,i});
+    }
+
+    sort(v.begin(),v.end(),cmp);
     for(auto it : v){
-        cout << it << " ";
+        answer.push_back(it.second);
     }
+    return answer;
 }
